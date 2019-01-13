@@ -4,6 +4,7 @@ import braintree from 'braintree-web-drop-in';
 import BraintreeDropin from 'braintree-dropin-react';
 import BraintreeSubmitButton from './BraintreeSubmitButton';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class BraintreeDrop extends Component {
   state = {
