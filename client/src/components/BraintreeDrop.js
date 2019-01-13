@@ -15,8 +15,6 @@ class BraintreeDrop extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-
     axios.get('/api/braintree_token')
       .then(res => {
         const { data: token } = res;
@@ -33,7 +31,7 @@ class BraintreeDrop extends Component {
     axios.post('/api/payment', { amount, ...payload })
       .then(res => {
         const { data: transactionId } = res;
-        this.setState({ redirect: true. transactionId})
+        this.setState({ redirect: true, transactionId})
       })
       .catch(res => {
         console.log('Error Postin Payment, try again')
