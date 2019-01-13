@@ -3,6 +3,7 @@ import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 import braintree from 'braintree-web-drop-in';
 import BraintreeDropin from 'braintree-dropin-react';
 import BraintreeSubmitButton from './BraintreeSubmitButton';
+import axios from 'axios';
 
 class BraintreeDrop extends Component {
   state = {
@@ -10,8 +11,20 @@ class BraintreeDrop extends Component {
     token: '',
   }
 
-  handlePaymentMethod = (payload) => {
+  componentDidMount() {
+    const { dispatch } = this.props;
 
+    axios.get('/api/braintree_token')
+      .then(res => {
+        const { data: token } = res;
+        this.setState({ token, loaded: true })
+      })
+      .catch( res => {
+        console.log('Error Setting Up Payments, try again')
+      })
+  }
+
+  handlePaymentMethod = (payload) => {
   }
 
   render() {

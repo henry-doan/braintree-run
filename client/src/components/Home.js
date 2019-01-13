@@ -12,7 +12,6 @@ class Home extends Component {
         <Header as='h1' textAlign='center'>
           React Payments
         </Header>
-        <Image centered size='small' src='http://www.homedeliveryscript.com/uploads/general-store.jpg' />
         <Label color='green'>Payment Amount</Label>
         <Input value={amount} disabled style={{ fontSize: '18px'}} />
         <Divider />
