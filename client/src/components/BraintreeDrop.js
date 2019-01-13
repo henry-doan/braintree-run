@@ -9,6 +9,8 @@ class BraintreeDrop extends Component {
   state = {
     loaded: false,
     token: '',
+    redirect: false,
+    transactionId: '',
   }
 
   componentDidMount() {
@@ -25,11 +27,29 @@ class BraintreeDrop extends Component {
   }
 
   handlePaymentMethod = (payload) => {
+    const { amount } = this.props
+
+    axios.post('/api/payment', { amount, ...payload })
+      .then(res => {
+        const { data: transactionId } = res;
+        this.setState({ redirect: true. transactionId})
+      })
+      .catch(res => {
+        console.log('Error Postin Payment, try again')
+        window.location.reload();
+      })
   }
 
   render() {
-    const { loaded, token } = this.state;
+    const { loaded, token, redirect, transactionId } = this.state;
 
+    if(redirect)
+      return(
+        <Redirect to={{
+          pathname: '/payment_success',
+          state: { amount: this.props.amount, transactionId }
+        }}/>
+      )
     if(loaded)
       return (
         <Segment basic textAlign='center'>
