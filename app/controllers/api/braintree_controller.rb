@@ -11,7 +11,7 @@ class Api::BraintreeController < ApplicationController
         :submit_for_settlement => true
       }
     )
-
+    
     if result.success?
       render json: result.transaction.id
     elsif result.transaction

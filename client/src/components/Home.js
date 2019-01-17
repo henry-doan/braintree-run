@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Segment, Input, Label, Divider, Image } from 'semantic-ui-react';
+import { Header, Segment, Input, Label, Divider } from 'semantic-ui-react';
 import BriantreeDrop from './BraintreeDrop';
 
 class Home extends Component {

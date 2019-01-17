@@ -20,7 +20,7 @@ class BraintreeDrop extends Component {
         const { data: token } = res;
         this.setState({ token, loaded: true })
       })
-      .catch( res => {
+      .catch( () => {
         console.log('Error Setting Up Payments, try again')
       })
   }
@@ -33,15 +33,30 @@ class BraintreeDrop extends Component {
         const { data: transactionId } = res;
         this.setState({ redirect: true, transactionId})
       })
-      .catch(res => {
+      .catch( () => {
         console.log('Error Postin Payment, try again')
         window.location.reload();
       })
   }
 
+  onCreate = (instance) => {
+    console.log('onCreate')
+  }
+
+  onDestroyStart = () => {
+    console.log('onDestroyStart')
+  }
+
+  onDestroyEnd = () => {
+    console.log('onDestroyEnd')
+  }
+
+  onError = (error) => {
+    console.log('onError', error)
+  }
+
   render() {
     const { loaded, token, redirect, transactionId } = this.state;
-
     if(redirect)
       return(
         <Redirect to={{
@@ -57,6 +72,10 @@ class BraintreeDrop extends Component {
             authorizationToken={token}
             handlePaymentMethod={this.handlePaymentMethod}
             renderSubmitButton={BraintreeSubmitButton}
+            onCreate={this.onCreate}
+          onDestroyStart={this.onDestroyStart}
+          onDestroyEnd={this.onDestroyEnd}
+          onError={this.onError}
           />
         </Segment>
       )
